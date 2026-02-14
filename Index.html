@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Soumya 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd6e8, #fff0f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", sans-serif;
+  overflow: hidden;
+  transition: background 0.8s ease;
+}
+
+.love-bg {
+  background: linear-gradient(135deg, #ff9ecb, #ffcce6);
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  text-align: center;
+  max-width: 380px;
+  position: relative;
+  display: none;
+}
+
+.card.active {
+  display: block;
+}
+
+img {
+  width: 220px;
+  margin-bottom: 15px;
+  animation: bounce 2s infinite;
+}
+
+h1 {
+  font-size: 22px;
+  color: #ff4d88;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 12px 26px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  border: none;
+  margin: 6px;
+  transition: 0.2s ease;
+}
+
+.yes {
+  background: #ff4d88;
+  color: white;
+}
+
+.no {
+  background: #ffd1e3;
+  color: #ff4d88;
+  position: absolute;
+}
+
+.btn:hover {
+  transform: scale(1.08);
+}
+
+@keyframes bounce {
+  0%,20%,50%,80%,100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-8px); }
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="card active" id="page1">
+  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+  <h1 id="question">Soumya, will you be my Valentine? 💖🥺</h1>
+
+  <button class="btn yes" onclick="startLove()">Yes 💕</button>
+  <button class="btn no" id="noBtn">No 🙈</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="card" id="page2">
+  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+  <h1>The moment you came into my life… everything felt magical ✨</h1>
+  <button class="btn yes" onclick="nextPage(3)">Next ➡️</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="card" id="page3">
+ <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+  <h1>No distance is ever strong enough to stop my love for you ❤️</h1>
+  <button class="btn yes" onclick="nextPage(4)">Next ➡️</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="card" id="page4">
+  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+  <h1>You are my safe place, my smile, my everything 🥰</h1>
+  <button class="btn yes" onclick="nextPage(5)">Next ➡️</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="card" id="page5">
+  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+  <h1>Yayyy!! I love you so much Soumya 💖💫</h1>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const question = document.getElementById("question");
+const card = document.getElementById("page1");
+
+const shyTexts = [
+  "Heyyy 😳 don’t run away",
+  "Nope 🙈 try again",
+  "You can’t escape love 💕",
+  "I know you want to say yes 😌",
+  "Okay now say YES 💖"
+];
+
+// Move button randomly inside card
+function moveButton() {
+  const cardRect = card.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  const maxX = cardRect.width - btnRect.width - 20;
+  const maxY = cardRect.height - btnRect.height - 20;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+
+  question.textContent = shyTexts[Math.floor(Math.random() * shyTexts.length)];
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton); // works on mobile
+
+function startLove() {
+  document.body.classList.add("love-bg");
+
+  for (let i = 0; i < 20; i++) {
+    let heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "100vh";
+    heart.style.fontSize = "24px";
+    heart.style.pointerEvents = "none";
+    heart.style.animation = "floatUp 3s linear forwards";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 3000);
+  }
+
+  const music = document.getElementById("music");
+  music.play().catch(() => {});
+
+  setTimeout(() => nextPage(2), 800);
+}
+
+function nextPage(pageNumber) {
+  document.querySelectorAll(".card").forEach(card => card.classList.remove("active"));
+  document.getElementById("page" + pageNumber).classList.add("active");
+}
+</script>
+
+</body>
+</html>
