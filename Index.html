@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Soumya 💖</title>
+<title>For chinu 💖</title>
 
 <style>
 body {
@@ -91,7 +91,7 @@ h1 {
 <!-- PAGE 1 -->
 <div class="card active" id="page1">
   <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
-  <h1 id="question">Soumya, will you be my Valentine? 💖🥺</h1>
+  <h1 id="question">chinu,will you be my Valentine? 💖🥺</h1>
 
   <button class="btn yes" onclick="startLove()">Yes 💕</button>
   <button class="btn no" id="noBtn">No 🙈</button>
@@ -121,7 +121,7 @@ h1 {
 <!-- PAGE 5 -->
 <div class="card" id="page5">
   <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
-  <h1>Yayyy!! I love you so much Soumya 💖💫</h1>
+  <h1>Yayyy!! I love you so much chinu💖💫</h1>
 </div>
 
 <!-- MUSIC -->
@@ -158,38 +158,3 @@ function moveButton() {
 
   question.textContent = shyTexts[Math.floor(Math.random() * shyTexts.length)];
 }
-
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("click", moveButton); // works on mobile
-
-function startLove() {
-  document.body.classList.add("love-bg");
-
-  for (let i = 0; i < 20; i++) {
-    let heart = document.createElement("div");
-    heart.innerHTML = "💖";
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.top = "100vh";
-    heart.style.fontSize = "24px";
-    heart.style.pointerEvents = "none";
-    heart.style.animation = "floatUp 3s linear forwards";
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 3000);
-  }
-
-  const music = document.getElementById("music");
-  music.play().catch(() => {});
-
-  setTimeout(() => nextPage(2), 800);
-}
-
-function nextPage(pageNumber) {
-  document.querySelectorAll(".card").forEach(card => card.classList.remove("active"));
-  document.getElementById("page" + pageNumber).classList.add("active");
-}
-</script>
-
-</body>
-</html>
